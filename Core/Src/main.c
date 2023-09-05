@@ -93,13 +93,22 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1)
+  int time = 5000;
+  int minus = 1000;
+  while (time != 0)
   {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-	HAL_Delay(500); // 5 segundos
+	if (!HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin))
+	{
+		HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, 1);
+		HAL_Delay(time);
+		HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, 0);
+
+		time -= minus;
+	}
+
   }
   /* USER CODE END 3 */
 }
